@@ -7,23 +7,23 @@ function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <RenderCard item={leader} />
+            <RenderLeader leader={leader} />
         );
     });
-function RenderCard( {item} ) {
+function RenderLeader( {leader} ) {
   return (
 
     <Media>
-      <Media left href={item.image}>
-      <img class="mr-3" src={item.image} alt="Generic placeholder image" />
+      <Media left href={leader.image}>
+      <img class="mr-3" src={leader.image} alt="Leader " />
       </Media>
       <Media body>
         <Media heading>
-          {item.name}
+          {leader.name}
         </Media>
-        <h5 className="mt-0 mb-1">{item.name}</h5>
-          <p>{item.designation}</p>
-          <p className="mb-4">{item.description}</p>
+        <h5 className="mt-0 mb-1">{leader.name}</h5>
+          <p>{leader.designation}</p>
+          <p className="mb-4">{leader.description}</p>
       </Media>
     </Media>
     
