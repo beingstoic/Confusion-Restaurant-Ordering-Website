@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import CommentForm from '../commentForm/commentForm'
 
 function RenderDish( {dish} ) {
   return (
@@ -13,7 +14,7 @@ function RenderDish( {dish} ) {
   );
 }
 
-function RenderComments( {comments} ) {
+function RenderComments( {comments, dishId, postComment} ) {
 
   if (comments == null || comments.length === 0) {
     return (
@@ -36,6 +37,7 @@ function RenderComments( {comments} ) {
       <ul className="list-unstyled">
         { renderedComments }
       </ul>
+      <CommentForm dishId={dishId} postComment={postComment}/>
     </div>
   );
 
@@ -61,7 +63,7 @@ const DishDetail = (props) => {
               <RenderDish dish={props.dish} />
             </div>
             <div className="col-12 col-md-5 m-1">
-              <RenderComments comments={props.comments} />
+            <RenderComments comments={props.comments} postComment={props.postComment} dishId={props.dish.id} />
             </div>
           </div>
       </div>
