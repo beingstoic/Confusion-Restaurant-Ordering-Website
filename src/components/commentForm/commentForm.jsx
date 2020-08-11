@@ -25,6 +25,7 @@ class CommentForm extends Component {
   handleSubmit(values) {
     this.toggleModal();
     
+    
 }
 
   render() {

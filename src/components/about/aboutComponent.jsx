@@ -1,31 +1,48 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import {Loading} from '../loadingComponent/loading';
+import {FadeTransform, Stagger} from 'react-animation-components';
+import {baseUrl} from '../../shared/baseUrl'
 
 function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <RenderLeader leader={leader} />
+            <Stagger in>
+                <RenderLeader leader={leader} isLoading={props.isLoading} errMess={props.errMess} />
+            </Stagger>
+            
         );
     });
-function RenderLeader( {leader} ) {
-  return (
-
-    <Media>
-      <Media left href={leader.image}>
-      <img class="mr-3" src={leader.image} alt="Leader " />
-      </Media>
-      <Media body>
-        <Media heading>
-          {leader.name}
-        </Media>
-        <h5 className="mt-0 mb-1">{leader.name}</h5>
-          <p>{leader.designation}</p>
-          <p className="mb-4">{leader.description}</p>
-      </Media>
-    </Media>
+function RenderLeader( {leader,isLoading, errMess}) {
+    if (isLoading) {
+        return(
+                <Loading />
+        );
+    }
+    else if (errMess) {
+        return(
+                <h4>{errMess}</h4>
+        );
+    }
+    else return (
+        <FadeTransform in 
+        transformProps={{exitTransform: 'scale(0.5 translateY(-50%)'}} >
+            <Media>
+                <Media left href={baseUrl +leader.image}>
+                <img class="mr-3" src={leader.image} alt="Leader " />
+                </Media>
+                <Media body>
+                    <Media heading>
+                    {leader.name}
+                    </Media>
+                    <h5 className="mt-0 mb-1">{leader.name}</h5>
+                    <p>{leader.designation}</p>
+                    <p className="mb-4">{leader.description}</p>
+                </Media>
+            </Media>
+        </FadeTransform>
     
   );
 }
